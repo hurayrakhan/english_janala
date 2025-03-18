@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Janala</title>
+    <!-- daisy UI / tailwind CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/21d35323a6.js" crossorigin="anonymous"></script>
+
+    <!-- font poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!-- font hind siliguri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .poppins-regular {
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .hind-siliguri-regular {
+            font-family: "Hind Siliguri", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .active {
+            background-color: #422AD5;
+            color: white;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body class="poppins-regular">
+    <header class="">
+        <nav
+            class="hidden display bg-gradient-to-t from-[#FFFFFF] to-[#b8b6b6] py-3 border-b-2 border-gray-200 z-50 fixed top-0 left-0 w-full shadow-sm opacity-96 ">
+            <div class="w-11/12 mx-auto flex justify-between items-center">
+                <div class="flex items-center">
+                    <h3 class="text-xl font-semibold">English</h3>
+                    <img src="assets/logo.png" alt="">
+                    <h3 class="text-xl font-medium">জানালা</h3>
+                </div>
+                <div class="flex gap-3">
+                    <a href="#faq" class="btn btn-primary btn-outline"><i
+                            class="fa-solid fa-circle-question"></i>FAQ</a>
+                    <a href="#vocabulary" class="btn btn-primary btn-outline"><i
+                            class="fa-solid fa-book-open"></i>Learn</a>
+                    <button id="btn_logout" class="btn btn-primary btn-outline"><i
+                            class="fa-solid fa-arrow-right-from-bracket"></i>Logout</button>
+                </div>
+            </div>
+        </nav>
+        <!-- banner section -->
+
+    </header>
+    <main>
+        <section id="banner"
+            class="w-11/12 mx-auto flex flex-col-reverse md:flex-row items-center md:justify-between py-20">
+            <div class="md:w-1/3 space-y-4">
+                <h2 class="text-3xl font-bold mb-7"><span class="text-[#00BCFF]">English</span> is Easy!!</h2>
+                <p class="text-lg hind-siliguri-regular">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন
+                    অথবা আপনার দক্ষতা বাড়াতে
+                    চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ .</p>
+
+                <input id="inp_name" class="input" type="text" placeholder="Enter Your Name">
+                <br>
+                <input id="inp_pass" class="input" type="password" name="" placeholder="password">
+                
+                <br>
+                <button id="btn_start" class="btn btn-primary">Get Started</button>
+
+
+            </div>
+            <div>
+                <img class="h-[400px] lg:h-[600px]" src="assets/hero-student.png" alt="">
+
+            </div>
+
+        </section>
+        <!-- vocabulary section -->
+        <section id="vocabulary" class="hidden display w-11/12 mx-auto text-center py-30">
+            <h3 class="text-2xl font-bold"><span class="text-[#00BCFF]">Let's</span> Learn Vocabularies</h3>
+            <div id="btn-container" class="my-8 flex justify-center flex-grow gap-3">
+                <!-- dynamic lesson button container -->
+            </div>
+            <div class="bg-[#F8F8F8] rounded-xl py-24 px-4">
+                <!-- spinner-->
+                <div>
+                    <span id="spinner" class="hide loading loading-dots loading-xl"></span>
+                </div>
+                <!-- no lesson selected alert -->
+                <div id="selected_no_lesson">
+                    <p class="text-xs text-gray-500">আপনি এখনো কোন Lesson Select করেন নি</p>
+                <h3 class="text-2xl font-semibold p-3">একটি Lesson Select করুন।</h3>
+                </div>
+                
+                <!-- vocab card container-->
+                <div id="vocab_container" class="grid grid-cols-3 gap-5">
+
+                </div>
+
+                <!-- modal -->
+                
+                
+                <dialog id="word_details_modal" class="modal modal-bottom sm:modal-middle">
+                    <div id="modal_details" class="modal-box text-left">
+                        <div id="word_title" class="py-5">
+                            
+                        </div>
+                        
+                            <h4 class="font-semibold py-1">Meaning</h4>
+                            <div id="word_meaning">
+                                
+                            </div>
+                        
+                        
+                            <h4 class="font-semibold pt-5 pb-1">Example</h4>
+                            <div id="word_sentence">
+                                
+                            </div>
+                        
+                        
+                            <h4 class="font-semibold pt-5 pb-1">সমার্থক শব্দ গুলো</h4>
+                            <div id="word_synonyms" class="flex gap-4">
+                                
+                            </div>
+                        
+                        <div class="mt-5">
+                            <form method="dialog">
+                                <button class="btn btn-primary">Complete learning</button>
+                            </form>
+                        </div>
+                    </div>        
+                </dialog>
+            </div>
+
+
+        </section>
+        <!-- FAQ section -->
+        <section id="faq" class="hidden display w-11/12 mx-auto my-30">
+            <h3 class="text-2xl font-bold text-center"><span class="text-[#00BCFF]">Frequently</span> Asked Questions
+            </h3>
+            <div class="my-12">
+                <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 my-4">
+                    <input type="radio" name="my-accordion-3" checked="checked" />
+                    <div class="collapse-title font-semibold">1. What is the difference between var, let, and const ?
+                    </div>
+                    <div class="collapse-content text-sm">var : is function-scoped, can be redeclared and updated, and
+                        is hoisted with undefined. It's outdated and not recommended. <br>
+                        let : is block-scoped, can be updated but not redeclared, and is hoisted without initialization.
+                        It's ideal for variables that change. <br>
+                        const : is block-scoped, cannot be updated or redeclared, and is best for constants or
+                        objects/arrays that shouldn't be reassigned.</div>
+                </div>
+                <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 my-4">
+                    <input type="radio" name="my-accordion-3" />
+                    <div class="collapse-title font-semibold">2. What is the difference between map(), forEach(), and
+                        filter() ?</div>
+                    <div class="collapse-content text-sm">map() creates a new array by applying a function to each
+                        element without modifying the original array. It's useful when you need to transform data. <br>
+                        forEach() simply iterates over an array and executes a function for each element but does not
+                        return a new array. It's ideal for tasks like logging or updating UI elements. <br>
+                        filter() returns a new array containing only the elements that satisfy a given condition, making
+                        it useful for extracting specific data from an array.</div>
+                </div>
+                <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 my-4">
+                    <input type="radio" name="my-accordion-3" />
+                    <div class="collapse-title font-semibold">3. Explain arrow functions and how they are different from
+                        regular functions?</div>
+                    <div class="collapse-content text-sm">Arrow functions (=>) are a concise way to write functions in
+                        JavaScript. They were introduced in ES6 and offer a shorter syntax compared to regular
+                        functions.</div>
+                </div>
+                <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 my-4">
+                    <input type="radio" name="my-accordion-3" />
+                    <div class="collapse-title font-semibold">4. How JavaScript Promises work ?</div>
+                    <div class="collapse-content text-sm"> A Promise in JavaScript works as a placeholder for a future
+                        value, handling asynchronous operations. It follows this flow: <br>
+
+                        1. Creation → A Promise is created with an executor function that has resolve (success) and
+                        reject (failure). <br>
+                        2. Pending State → The Promise starts in a pending state while the operation runs. <br>
+                        3. Resolved or Rejected → When the operation finishes: <br>
+                        * If successful, resolve(value) moves the Promise to fulfilled. <br>
+                        * If failed, reject(error) moves it to rejected. <br>
+                        4. Handling Results → .then() processes resolved data, .catch() handles errors, and .finally()
+                        executes cleanup code.
+                    </div>
+                </div>
+                <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 my-4">
+                    <input type="radio" name="my-accordion-3" />
+                    <div class="collapse-title font-semibold">5. How closures work in JavaScript ?</div>
+                    <div class="collapse-content text-sm">1. When a function is defined inside another function, it has
+                        access to the outer function's variables. <br>
+                        2. If the inner function is returned or used later, it still retains access to those variables,
+                        even though the outer function has finished execution.</div>
+                </div>
+
+
+            </div>
+        </section>
+    </main>
+    <!-- footer -->
+    <footer class="border-t-1 border-t-red-300 ">
+        <div class="w-11/12 mx-auto flex justify-between py-12">
+            <div>
+                <div class="flex items-center">
+                    <h3 class="text-xl font-semibold">English</h3>
+                    <img src="assets/logo.png" alt="">
+                    <h3 class="text-xl font-medium">জানালা</h3>
+                </div>
+                <p class="py-4 font-semibold">ইংরেজি শিখুন সহজে</p>
+                <p>Providing ED-Tech Applications since 2025</p>
+            </div>
+            <div>
+                <p class="text-sm py-3">Follow Us</p>
+                <div class="flex gap-2">
+                    <a target="_blank" href="https://www.facebook.com/hurayra.khan.965/"><img src="assets/fb-thumb.png"
+                            alt=""></a>
+                    <a target="_blank" href="https://github.com/hurayrakhan"><img src="assets/github-thumb.png"
+                            alt=""></a>
+                    <a target="_blank" href="https://www.youtube.com/"><img src="assets/youtube-thumb.png" alt=""></a>
+                    <a target="_blank" href="https://www.instagram.com/_hurayra_khan/"><img
+                            src="assets/instagram-thumb.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script/script.js"></script>
+</body>
+
+</html>

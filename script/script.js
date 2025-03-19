@@ -3,6 +3,8 @@
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
         e.preventDefault();
+        document.getElementById("vocab_container").classList.add("hidden")
+
         const target = document.querySelector(this.getAttribute("href"));
         const offset = 100;
         const position = target.offsetTop - offset;
@@ -94,6 +96,7 @@ function removeActiveClass (){
 
 // load vocab from api
 const loadVocab = (id) => {
+    document.getElementById("vocab_container").classList.remove("hidden");
     const url = `https://openapi.programming-hero.com/api/level/${id}`
     showLoader();
     defaultLessonHide();

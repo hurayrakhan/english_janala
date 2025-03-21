@@ -33,6 +33,7 @@ const defaultLessonHide = () =>{
 // get started btn
 document.getElementById("btn_start").addEventListener("click", function (event) {
     event.preventDefault();
+
     const nameInput = document.getElementById("inp_name").value;
     const passInput = document.getElementById("inp_pass").value;
 
@@ -60,6 +61,7 @@ document.getElementById("btn_start").addEventListener("click", function (event) 
 })
 // logout button functionalities
 document.getElementById("btn_logout").addEventListener("click", (event) => {
+    document.getElementById("vocab_container").innerHTML = ""
     const banner = document.getElementById("banner");
     const defaultPage = document.querySelectorAll(".display");
     for(let page of defaultPage){
@@ -67,6 +69,8 @@ document.getElementById("btn_logout").addEventListener("click", (event) => {
         page.classList.add("hidden");
     }
     banner.classList.remove("hidden");
+    
+
 
 })
 
@@ -115,6 +119,7 @@ const loadVocab = (id) => {
 const displayVocab = (vocabularies) => {
     
     const vocabContainer = document.getElementById("vocab_container");
+
     vocabContainer.innerHTML = ""
     if(vocabularies.length == 0){
 
